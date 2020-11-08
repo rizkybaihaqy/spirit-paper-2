@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -28,43 +30,83 @@
 
 <body>
     <div class="container margin-top">
-        <div class="row">
-            <div class="col s12 m9 l8 xl6">
-                <form action="" name="spiritPaper">
-                    <div class="input-field">
-                        <i class="material-icons prefix">person</i>
-                        <input type="text" name="nama" id="nama">
-                        <label for="nama">Surat Untuk</label>
-                    </div>
-                    <div class="input-field">
-                        <select name="pilihanGambar" id="pilihanGambar">
-                            <option selected disabled value="">--Pilih Gambar--</option>
-                            <option value="imgs/es.png">es</option>
-                            <option value="imgs/es3.png">es3</option>
-                            <option value="imgs/es4.png">es4</option>
-                            <option value="imgs/Kinderjoy.png">Kinder Joy</option>
-                            <option value="imgs/SUSU.png">Susu</option>
-                            <option value="imgs/Beer.jpg">Beer</option>
-                            <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
-                            <option value="imgs/5dolar.jpg">5 dolar</option>
-                            <option value="imgs/beer2.jpg">Beer 2</option>
-                            <option value="imgs/botol.jpg">Botol</option>
-                            <option value="imgs/botol2.jpg">Botol 2</option>
-                            <option value="imgs/malkis.jpg">Malkis</option>
-                        </select>
-                        <label for="pilihanGambar">Pilih Gambar</label>
-                    </div>
-                    <canvas id="c" width="500" height="500" class="hoverable"></canvas>
-                    <div class="margin-top">
-                        <a type="button" id="download" class="btn waves-effect waves-light"
-                            onclick="validasiForm()">Download</a>
-                        <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
-                            onclick="addTextBox()">Add New Text Box</a> -->
-                        <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
-                    </div>
-                </form>
+        <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-1">
+            <li class="tab col s6"><a href="#single" class="active">Simple</a></li>
+            <li class="tab col s6"><a href="#multi">Multiple Text Box</a></li>
+        </ul>
+        <section id="single" class="col s12 container">
+            <div class="row">
+                <div class="col s12 m9 l8 xl6">
+                    <form action="" name="spiritPaper">
+                        <div class="input-field">
+                            <i class="material-icons prefix">person</i>
+                            <input type="text" name="nama" id="nama">
+                            <label for="nama">Surat Untuk</label>
+                        </div>
+                        <div class="input-field">
+                            <select name="pilihanGambar" id="pilihanGambar">
+                                <option selected disabled value="">--Pilih Gambar--</option>
+                                <option value="imgs/es.png">es</option>
+                                <option value="imgs/es3.png">es3</option>
+                                <option value="imgs/es4.png">es4</option>
+                                <option value="imgs/Kinderjoy.png">Kinder Joy</option>
+                                <option value="imgs/SUSU.png">Susu</option>
+                                <option value="imgs/Beer.jpg">Beer</option>
+                                <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
+                                <option value="imgs/5dolar.jpg">5 dolar</option>
+                                <option value="imgs/beer2.jpg">Beer 2</option>
+                                <option value="imgs/botol.jpg">Botol</option>
+                                <option value="imgs/botol2.jpg">Botol 2</option>
+                                <option value="imgs/malkis.jpg">Malkis</option>
+                                <option value="imgs/kfc.jpg">KFC</option>
+                                <option value="imgs/susu2.jpg">susu2</option>
+                                <option value="imgs/santen.jpg">santen</option>
+                                <option value="imgs/stoberi.jpg">starbucks stroberi</option>
+                                <option value="imgs/vineta.jpg">Vineta</option>
+                            </select>
+                            <label for="pilihanGambar">Pilih Gambar</label>
+                        </div>
+                        <canvas id="c" width="500" height="500" class="hoverable"></canvas>
+                        <div class="margin-top">
+                            <a type="button" id="download" class="btn waves-effect waves-light"
+                                onclick="validasiForm()">Download</a>
+                            <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
+                                onclick="addTextBox()">Add New Text Box</a> -->
+                            <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
+        <section id="multi" class="col s12 container">
+            <div class="row">
+                <div class="col s12 m9 l8 xl8">
+                    <form action="" name="spiritPaper-multi">
+                        <div class="input-field">
+                            <i class="material-icons prefix">person</i>
+                            <input type="text" name="nama-multi" id="nama-multi">
+                            <label for="nama-multi">Surat Untuk</label>
+                        </div>
+                        <div class="input-field">
+                            <select name="pilihanGambar-multi" id="pilihanGambar-multi">
+                                <option selected disabled value="">--Pilih Gambar--</option>
+                                <option value="imgs/bundle_halal.jpg">bundle halal</option>
+                                <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
+                            </select>
+                            <label for="pilihanGambar">Pilih Gambar</label>
+                        </div>
+                        <canvas id="c-multi" width="500" height="500" class="hoverable"></canvas>
+                        <div class="margin-top">
+                            <a type="button" value="addText" id="addText-multi" class="btn waves-effect waves-light"
+                                onclick="addTextBox_multi()">Add New Text Box</a>
+                            <a type="button" id="download-multi" class="btn waves-effect waves-light"
+                                onclick="validasiForm_multi()">Download</a>
+                            <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
 
 
