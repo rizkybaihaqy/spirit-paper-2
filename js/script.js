@@ -33,9 +33,9 @@ canvas.add(text);
 document
   .getElementById("pilihanGambar")
   .addEventListener("change", function () {
+    console.log("gambar");
     var gambar = document.getElementById("pilihanGambar").value;
     img.src = gambar;
-    //   console.log(img.src);
 
     fabric.Image.fromURL(img.src, function (img) {
       img.set({
