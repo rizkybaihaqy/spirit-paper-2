@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- favicon -->
-    <link rel="icon" type="image/png" href="favicon-16x16.png">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -25,11 +23,17 @@
     <!-- file saver js -->
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
 
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+
     <title>Spirit Paper</title>
 </head>
 
 <body>
-    <div class="container margin-top">
+    <div class="container">
         <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-1">
             <li class="tab col s6"><a href="#single" class="active">Simple</a></li>
             <li class="tab col s6"><a href="#multi">Multiple Text Box</a></li>
@@ -43,8 +47,9 @@
                             <input type="text" name="nama" id="nama">
                             <label for="nama">Surat Untuk</label>
                         </div>
-                        <div class="input-field">
-                            <select name="pilihanGambar" id="pilihanGambar">
+                        <div class="margin-bottom">
+                            <label for="pilihanGambar">Pilih Gambar</label>
+                            <select name="pilihanGambar" id="pilihanGambar" class="browser-default">
                                 <option selected disabled value="">--Pilih Gambar--</option>
                                 <option value="imgs/es.png">es</option>
                                 <option value="imgs/es3.png">es3</option>
@@ -64,10 +69,8 @@
                                 <option value="imgs/stoberi.jpg">starbucks stroberi</option>
                                 <option value="imgs/vineta.jpg">Vineta</option>
                             </select>
-                            <label for="pilihanGambar">Pilih Gambar</label>
                         </div>
-                        <canvas id="c" width="500" height="500" class="hoverable"></canvas>
-                        <div class="margin-top">
+                        <div class="margin-bottom">
                             <a type="button" id="download" class="btn waves-effect waves-light"
                                 onclick="validasiForm()">Download</a>
                             <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
@@ -75,6 +78,11 @@
                             <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
                         </div>
                     </form>
+                    <div class="hide-on-med-and-up">
+                        <hr>
+                        <p>Coba Geser Disini</p>
+                    </div>
+                    <canvas id="c" width="500" height="500" class="hoverable"></canvas>
                 </div>
             </div>
         </section>
@@ -87,22 +95,26 @@
                             <input type="text" name="nama-multi" id="nama-multi">
                             <label for="nama-multi">Surat Untuk</label>
                         </div>
-                        <div class="input-field">
-                            <select name="pilihanGambar-multi" id="pilihanGambar-multi">
+                        <div class="margin-bottom">
+                            <label for="pilihanGambar">Pilih Gambar</label>
+                            <select name="pilihanGambar-multi" id="pilihanGambar-multi" class="browser-default">
                                 <option selected disabled value="">--Pilih Gambar--</option>
                                 <option value="imgs/bundle_halal.jpg">bundle halal</option>
                                 <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
                             </select>
-                            <label for="pilihanGambar">Pilih Gambar</label>
                         </div>
-                        <canvas id="c-multi" width="500" height="500" class="hoverable"></canvas>
-                        <div class="margin-top">
+                        <div class="margin-bottom">
                             <a type="button" value="addText" id="addText-multi" class="btn waves-effect waves-light"
                                 onclick="addTextBox_multi()">Add New Text Box</a>
                             <a type="button" id="download-multi" class="btn waves-effect waves-light"
                                 onclick="validasiForm_multi()">Download</a>
                             <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
                         </div>
+                        <div class="hide-on-med-and-up">
+                            <hr>
+                            <p>Coba Geser Disini</p>
+                        </div>
+                        <canvas id="c-multi" width="500" height="500" class="hoverable"></canvas>
                     </form>
                 </div>
             </div>
