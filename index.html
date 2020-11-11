@@ -41,10 +41,10 @@
                 <span class="mdl-layout-title">Spirit Paper</span>
             </div>
             <!-- Tabs -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <!-- <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
                 <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
-            </div>
+            </div> -->
         </header>
         <!-- <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Title</span>
@@ -56,6 +56,8 @@
                     <section id="single" class="">
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--4-offset-desktop">
+                                <canvas id="c" width="500" height="500" class="margin-bottom"></canvas>
+                                <hr>
                                 <form action="" name="spiritPaper">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input type="text" name="nama" id="nama" class="mdl-textfield__input">
@@ -95,7 +97,6 @@
                                             class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
                                     </div>
                                 </form>
-                                <canvas id="c" width="500" height="500" class=""></canvas>
                             </div>
                         </div>
                     </section>
@@ -108,6 +109,8 @@
                     <section id="multi" class="">
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--4-offset-desktop">
+                                <canvas id="c-multi" width="500" height="500" class="margin-bottom"></canvas>
+                                <hr>
                                 <form action="" name="spiritPaper-multi">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input type="text" name="nama-multi" id="nama-multi"
@@ -135,7 +138,6 @@
                                         <button type="reset"
                                             class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
                                     </div>
-                                    <canvas id="c-multi" width="500" height="500" class=""></canvas>
                                 </form>
                             </div>
                         </div>
@@ -144,6 +146,13 @@
                 </div>
             </section>
         </main>
+        <footer class="mdl-layout__header">
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
+            </div>
+        </footer>
     </div>
     <div class="mdl-snackbar mdl-js-snackbar">
         <div class="mdl-snackbar__text"></div>
