@@ -1,9 +1,5 @@
-$(document).ready(function () {
-  $("select").formSelect();
-  $(".tabs").tabs();
-});
-
 var img = new Image();
+var mobileZoom = 0.75;
 
 // (function () {
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = "center";
@@ -15,6 +11,11 @@ canvas.setBackgroundImage("imgs/500.png", canvas.renderAll.bind(canvas), {
   left: 250,
   top: 250,
 });
+if (screen.width < 576) {
+  canvas.setZoom(mobileZoom);
+  canvas.setWidth(500 * canvas.getZoom());
+  canvas.setHeight(500 * canvas.getZoom());
+}
 
 var text = new fabric.Textbox(
   "Text Disni\ntextbox bisa diubah ukuran dan posisi",
@@ -55,20 +56,20 @@ document
     });
   });
 
-function addTextBox() {
-  var textLiar = new fabric.Textbox("TEXTBOX TAMBAHAN", {
-    width: 200,
-    fontSize: 20,
-    fontFamily: "Helvetica",
-    fill: "white",
-    left: 250,
-    top: 260,
-    textAlign: "center",
-  });
-  canvas.add(textLiar);
-  //   canvas.bringToFront(textLiar);
-  //   console.log("ada");
-}
+// function addTextBox() {
+//   var textLiar = new fabric.Textbox("TEXTBOX TAMBAHAN", {
+//     width: 200,
+//     fontSize: 20,
+//     fontFamily: "Helvetica",
+//     fill: "white",
+//     left: 250,
+//     top: 260,
+//     textAlign: "center",
+//   });
+//   canvas.add(textLiar);
+//   canvas.bringToFront(textLiar);
+//   console.log("ada");
+// }
 // })();
 
 document.getElementById("nama").addEventListener("change", function () {
@@ -84,9 +85,8 @@ document.getElementById("nama").addEventListener("change", function () {
 
 function validasiForm() {
   if (document.forms["spiritPaper"]["nama"].value == "") {
-    M.toast({
-      html: "Masukan tujuan surat dulu",
-      classes: "red",
+    document.querySelector(".mdl-js-snackbar").MaterialSnackbar.showSnackbar({
+      message: "Tulis Tujuan Surat Terlebih Dahulu",
     });
     return false;
   } else {
@@ -108,6 +108,12 @@ canvas_multi.setBackgroundImage(
     top: 250,
   }
 );
+
+if (screen.width < 576) {
+  canvas_multi.setZoom(mobileZoom);
+  canvas_multi.setWidth(500 * canvas.getZoom());
+  canvas_multi.setHeight(500 * canvas.getZoom());
+}
 
 var text_multi = new fabric.Textbox(
   "Text Disni\ntextbox bisa ditambah dengan memilih tombol add new textbox",
@@ -177,9 +183,8 @@ document.getElementById("nama-multi").addEventListener("change", function () {
 
 function validasiForm_multi() {
   if (document.forms["spiritPaper-multi"]["nama-multi"].value == "") {
-    M.toast({
-      html: "Masukan tujuan surat dulu",
-      classes: "red",
+    document.querySelector(".mdl-js-snackbar").MaterialSnackbar.showSnackbar({
+      message: "Tulis Tujuan Surat Terlebih Dahulu",
     });
     return false;
   } else {

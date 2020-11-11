@@ -4,9 +4,9 @@
 <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <!-- mdlite -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,98 +33,126 @@
 </head>
 
 <body>
-    <div class="container">
-        <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-1">
-            <li class="tab col s6"><a href="#single" class="active">Simple</a></li>
-            <li class="tab col s6"><a href="#multi">Multiple Text Box</a></li>
-        </ul>
-        <section id="single" class="col s12 container">
-            <div class="row">
-                <div class="col s12 m9 l8 xl6">
-                    <form action="" name="spiritPaper">
-                        <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <input type="text" name="nama" id="nama">
-                            <label for="nama">Surat Untuk</label>
-                        </div>
-                        <div class="margin-bottom">
-                            <label for="pilihanGambar">Pilih Gambar</label>
-                            <select name="pilihanGambar" id="pilihanGambar" class="browser-default">
-                                <option selected disabled value="">--Pilih Gambar--</option>
-                                <option value="imgs/es.png">es</option>
-                                <option value="imgs/es3.png">es3</option>
-                                <option value="imgs/es4.png">es4</option>
-                                <option value="imgs/Kinderjoy.png">Kinder Joy</option>
-                                <option value="imgs/SUSU.png">Susu</option>
-                                <option value="imgs/Beer.jpg">Beer</option>
-                                <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
-                                <option value="imgs/5dolar.jpg">5 dolar</option>
-                                <option value="imgs/beer2.jpg">Beer 2</option>
-                                <option value="imgs/botol.jpg">Botol</option>
-                                <option value="imgs/botol2.jpg">Botol 2</option>
-                                <option value="imgs/malkis.jpg">Malkis</option>
-                                <option value="imgs/kfc.jpg">KFC</option>
-                                <option value="imgs/susu2.jpg">susu2</option>
-                                <option value="imgs/santen.jpg">santen</option>
-                                <option value="imgs/stoberi.jpg">starbucks stroberi</option>
-                                <option value="imgs/vineta.jpg">Vineta</option>
-                            </select>
-                        </div>
-                        <div class="margin-bottom">
-                            <a type="button" id="download" class="btn waves-effect waves-light"
-                                onclick="validasiForm()">Download</a>
-                            <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
-                                onclick="addTextBox()">Add New Text Box</a> -->
-                            <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
-                        </div>
-                    </form>
-                    <div class="hide-on-med-and-up">
-                        <hr>
-                        <p>Coba Geser Disini</p>
-                    </div>
-                    <canvas id="c" width="500" height="500" class="hoverable"></canvas>
-                </div>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+    mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Spirit Paper</span>
             </div>
-        </section>
-        <section id="multi" class="col s12 container">
-            <div class="row">
-                <div class="col s12 m9 l8 xl8">
-                    <form action="" name="spiritPaper-multi">
-                        <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <input type="text" name="nama-multi" id="nama-multi">
-                            <label for="nama-multi">Surat Untuk</label>
-                        </div>
-                        <div class="margin-bottom">
-                            <label for="pilihanGambar">Pilih Gambar</label>
-                            <select name="pilihanGambar-multi" id="pilihanGambar-multi" class="browser-default">
-                                <option selected disabled value="">--Pilih Gambar--</option>
-                                <option value="imgs/bundle_halal.jpg">bundle halal</option>
-                                <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
-                            </select>
-                        </div>
-                        <div class="margin-bottom">
-                            <a type="button" value="addText" id="addText-multi" class="btn waves-effect waves-light"
-                                onclick="addTextBox_multi()">Add New Text Box</a>
-                            <a type="button" id="download-multi" class="btn waves-effect waves-light"
-                                onclick="validasiForm_multi()">Download</a>
-                            <button type="reset" class="btn-flat waves-effect waves-red">Reset</button>
-                        </div>
-                        <div class="hide-on-med-and-up">
-                            <hr>
-                            <p>Coba Geser Disini</p>
-                        </div>
-                        <canvas id="c-multi" width="500" height="500" class="hoverable"></canvas>
-                    </form>
-                </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
             </div>
-        </section>
-    </div>
+        </header>
+        <!-- <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+        </div> -->
+        <main class="mdl-layout__content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
 
+                    <section id="single" class="">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--4-offset-desktop">
+                                <form action="" name="spiritPaper">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input type="text" name="nama" id="nama" class="mdl-textfield__input">
+                                        <label for="nama" class="mdl-textfield__label">Surat Untuk</label>
+                                    </div>
+                                    <div
+                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
+                                        <select name="pilihanGambar" id="pilihanGambar" class="mdl-textfield__input">
+                                            <option selected disabled value=""></option>
+                                            <option value="imgs/es.png">es</option>
+                                            <option value="imgs/es3.png">es3</option>
+                                            <option value="imgs/es4.png">es4</option>
+                                            <option value="imgs/Kinderjoy.png">Kinder Joy</option>
+                                            <option value="imgs/SUSU.png">Susu</option>
+                                            <option value="imgs/Beer.jpg">Beer</option>
+                                            <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
+                                            <option value="imgs/5dolar.jpg">5 dolar</option>
+                                            <option value="imgs/beer2.jpg">Beer 2</option>
+                                            <option value="imgs/botol.jpg">Botol</option>
+                                            <option value="imgs/botol2.jpg">Botol 2</option>
+                                            <option value="imgs/malkis.jpg">Malkis</option>
+                                            <option value="imgs/kfc.jpg">KFC</option>
+                                            <option value="imgs/susu2.jpg">susu2</option>
+                                            <option value="imgs/santen.jpg">santen</option>
+                                            <option value="imgs/stoberi.jpg">starbucks stroberi</option>
+                                            <option value="imgs/vineta.jpg">Vineta</option>
+                                        </select>
+                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
+                                    </div>
+                                    <div class="margin-bottom">
+                                        <a type="button" id="download"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                            onclick="validasiForm()">Download</a>
+                                        <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
+                                            onclick="addTextBox()">Add New Text Box</a> -->
+                                        <button type="reset"
+                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                                    </div>
+                                </form>
+                                <canvas id="c" width="500" height="500" class=""></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+                <div class="page-content">
+
+                    <section id="multi" class="">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--4-offset-desktop">
+                                <form action="" name="spiritPaper-multi">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input type="text" name="nama-multi" id="nama-multi"
+                                            class="mdl-textfield__input">
+                                        <label for="nama-multi" class="mdl-textfield__label">Surat Untuk</label>
+                                    </div>
+                                    <div
+                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
+                                        <select name="pilihanGambar-multi" id="pilihanGambar-multi"
+                                            class="mdl-textfield__input">
+                                            <option selected disabled value=""></option>
+                                            <option value="imgs/bundle_halal.jpg">bundle halal</option>
+                                            <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
+                                        </select>
+                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
+                                    </div>
+                                    <div class="margin-bottom">
+                                        <a type="button" value="addText" id="addText-multi"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                            onclick="addTextBox_multi()">Add New
+                                            Text Box</a>
+                                        <a type="button" id="download-multi"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                            onclick="validasiForm_multi()">Download</a>
+                                        <button type="reset"
+                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                                    </div>
+                                    <canvas id="c-multi" width="500" height="500" class=""></canvas>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
 
     <!--JavaScript at end of body for optimized loading-->
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
     <!-- local js -->
     <script src="js/script.js"></script>
