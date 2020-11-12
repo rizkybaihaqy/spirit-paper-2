@@ -34,7 +34,7 @@ canvas.add(text);
 document
   .getElementById("pilihanGambar")
   .addEventListener("change", function () {
-    console.log("gambar");
+    // console.log("gambar");
     var gambar = document.getElementById("pilihanGambar").value;
     img.src = gambar;
 
@@ -71,15 +71,29 @@ document
 //   console.log("ada");
 // }
 // })();
+function persiapanPrint() {
+  var teksAktif = canvas.getActiveObject();
+  if (teksAktif) {
+    canvas.discardActiveObject(teksAktif);
+    canvas.requestRenderAll();
+  }
+}
+
+function print(nama) {
+  $("#c")
+    .get(0)
+    .toBlob(function (blob) {
+      saveAs(blob, nama);
+    });
+}
 
 document.getElementById("nama").addEventListener("change", function () {
   var nama = document.getElementById("nama").value;
   $("#download").click(function () {
-    $("#c")
-      .get(0)
-      .toBlob(function (blob) {
-        saveAs(blob, nama);
-      });
+    persiapanPrint();
+    setTimeout(function () {
+      print(nama);
+    }, 1000);
   });
 });
 
@@ -169,15 +183,30 @@ function addTextBox_multi() {
   //   console.log("ada");
 }
 
+function persiapanPrint() {
+  var teksAktif = canvas_multi.getActiveObject();
+  if (teksAktif) {
+    canvas_multi.discardActiveObject(teksAktif);
+    canvas_multi.requestRenderAll();
+  }
+}
+
+function print(nama) {
+  $("#c-multi")
+    .get(0)
+    .toBlob(function (blob) {
+      saveAs(blob, nama);
+    });
+}
+
 //Nama dan Filesaver
 document.getElementById("nama-multi").addEventListener("change", function () {
   var nama = document.getElementById("nama-multi").value;
   $("#download-multi").click(function () {
-    $("#c-multi")
-      .get(0)
-      .toBlob(function (blob) {
-        saveAs(blob, nama);
-      });
+    persiapanPrint();
+    setTimeout(function () {
+      print(nama);
+    }, 1000);
   });
 });
 
