@@ -1,5 +1,5 @@
 var img = new Image();
-var mobileZoom = 0.75;
+var mobileZoom = 0.65;
 
 // (function () {
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = "center";
