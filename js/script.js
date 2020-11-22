@@ -71,28 +71,21 @@ document
 //   console.log("ada");
 // }
 // })();
-function persiapanPrint() {
-  var teksAktif = canvas.getActiveObject();
-  if (teksAktif) {
-    canvas.discardActiveObject(teksAktif);
-    canvas.requestRenderAll();
-  }
-}
-
-function print(nama) {
-  $("#c")
-    .get(0)
-    .toBlob(function (blob) {
-      saveAs(blob, nama);
-    });
-}
 
 document.getElementById("nama").addEventListener("change", function () {
   var nama = document.getElementById("nama").value;
+  nama = nama + ".png";
   $("#download").click(function () {
-    persiapanPrint();
+    //bersihkan canvas sebelum print
+    canvas.discardActiveObject(canvas.getActiveObject());
+    canvas.requestRenderAll();
     setTimeout(function () {
-      print(nama);
+      //printing
+      $("#c")
+        .get(0)
+        .toBlob(function (blob) {
+          saveAs(blob, nama);
+        });
     }, 1000);
   });
 });

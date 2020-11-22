@@ -28,3 +28,12 @@ canvas {
 .mdl-ripple {
   background-color: #f44336;
 }
+
+.mdl-slider,
+.mdl-slider__background-flex {
+  margin: 0px;
+}
+
+.label-slider {
+  color: #9e9e9e;
+}
