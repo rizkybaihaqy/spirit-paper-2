@@ -153,12 +153,70 @@
 
                 </div>
             </section>
+
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+                <div class="page-content">
+
+                    <section id="custom" class="">
+                        <div class="mdl-grid">
+                            <div
+                                class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
+                                <hr>
+                                <form action="" name="spiritPaper-custom">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input type="text" name="nama-custom" id="nama-custom"
+                                            class="mdl-textfield__input">
+                                        <label for="nama-custom" class="mdl-textfield__label">Surat Untuk</label>
+                                    </div>
+                                    <!-- <div
+                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
+                                        <select name="pilihanGambar-custom" id="pilihanGambar-custom"
+                                            class="mdl-textfield__input">
+                                            <option selected disabled value=""></option>
+                                            <option value="imgs/bundle_halal.jpg">bundle halal</option>
+                                            <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
+                                        </select>
+                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
+                                    </div> -->
+                                    <div class="mdl-textfield mdl-textfield--floating-label is-focused margin-bottom">
+                                        <input type="file" id="pilihanGambar-custom" name="pilihanGambar-custom"
+                                            class="mdl-textfield__input">
+                                        <label for="pilihanGambar-custom" class="mdl-textfield__label">Pilih File
+                                            Foto:</label>
+                                    </div>
+                                    <div class="margin-bottom">
+                                        <a type="button" value="addText" id="addText-custom"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                            onclick="addTextBox_custom()">Add New
+                                            Text Box</a>
+                                        <a type="button" id="download-custom"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                            onclick="validasiForm_custom()">Download</a>
+                                        <button type="reset"
+                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
+                                <canvas id="c-custom" width="500" height="500" class="margin-bottom"></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+            <section id="tooltips">
+                <div class="mdl-tooltip" for="addText-custom">
+                    Gunakan tombol delete<br>untuk menghapus teks box
+                </div>
+            </section>
         </main>
         <footer class="mdl-layout__header">
             <!-- Tabs -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
                 <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">Custom Image</a>
             </div>
         </footer>
     </div>
