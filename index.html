@@ -134,6 +134,9 @@
                                             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                                             onclick="addTextBox_multi()">Add New
                                             Text Box</a>
+                                        <div class="mdl-tooltip" for="addText-multi">
+                                            Gunakan tombol delete<br>untuk menghapus teks box
+                                        </div>
                                         <a type="button" id="download-multi"
                                             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                                             onclick="validasiForm_multi()">Download</a>
@@ -142,7 +145,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone">
+                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
                                 <canvas id="c-multi" width="500" height="500" class="margin-bottom"></canvas>
                             </div>
                         </div>
