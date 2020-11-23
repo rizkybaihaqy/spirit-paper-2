@@ -31,30 +31,30 @@ var text = new fabric.Textbox(
 );
 canvas.add(text);
 
-document
-  .getElementById("pilihanGambar")
-  .addEventListener("change", function () {
-    // console.log("gambar");
-    var gambar = document.getElementById("pilihanGambar").value;
-    img.src = gambar;
+// document
+//   .getElementById("pilihanGambar")
+//   .addEventListener("change", function () {
+//     // console.log("gambar");
+//     var gambar = document.getElementById("pilihanGambar").value;
+//     img.src = gambar;
 
-    fabric.Image.fromURL(img.src, function (img) {
-      img.set({
-        left: 250,
-        top: 250,
-        //   selectable: false,
-      });
+//     fabric.Image.fromURL(img.src, function (img) {
+//       img.set({
+//         left: 250,
+//         top: 250,
+//         //   selectable: false,
+//       });
 
-      var filter = new fabric.Image.filters.Brightness({
-        brightness: -0.15,
-      });
-      img.filters.push(filter);
-      img.applyFilters();
-      canvas.backgroundImage = img;
-      // canvas.add(img);
-      canvas.bringToFront(text);
-    });
-  });
+//       var filter = new fabric.Image.filters.Brightness({
+//         brightness: -0.15,
+//       });
+//       img.filters.push(filter);
+//       img.applyFilters();
+//       canvas.backgroundImage = img;
+//       // canvas.add(img);
+//       canvas.bringToFront(text);
+//     });
+//   });
 
 // function addTextBox() {
 //   var textLiar = new fabric.Textbox("TEXTBOX TAMBAHAN", {

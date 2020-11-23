@@ -176,29 +176,21 @@ function addTextBox_multi() {
   //   console.log("ada");
 }
 
-function persiapanPrint() {
-  var teksAktif = canvas_multi.getActiveObject();
-  if (teksAktif) {
-    canvas_multi.discardActiveObject(teksAktif);
-    canvas_multi.requestRenderAll();
-  }
-}
-
-function print(nama) {
-  $("#c-multi")
-    .get(0)
-    .toBlob(function (blob) {
-      saveAs(blob, nama);
-    });
-}
-
 //Nama dan Filesaver
 document.getElementById("nama-multi").addEventListener("change", function () {
   var nama = document.getElementById("nama-multi").value;
+  nama = nama + ".png";
   $("#download-multi").click(function () {
-    persiapanPrint();
+    //bersihkan canvas sebelum print
+    canvas_multi.discardActiveObject(canvas_multi.getActiveObject());
+    canvas_multi.requestRenderAll();
     setTimeout(function () {
-      print(nama);
+      //printing
+      $("#c-multi")
+        .get(0)
+        .toBlob(function (blob) {
+          saveAs(blob, nama);
+        });
     }, 1000);
   });
 });
@@ -225,6 +217,125 @@ function deleteObjectKeyboard() {
     if ("Delete" === e.key) {
       canvas_multi.remove(canvas_multi.getActiveObject());
       canvas_multi.requestRenderAll();
+    }
+  };
+}
+
+//CUSTOM
+
+//canvas_custom
+var canvas_custom = (this.__canvas = new fabric.Canvas("c-custom", {
+  preserveObjectStacking: true,
+}));
+canvas_custom.setBackgroundImage(
+  "imgs/500.png",
+  canvas_custom.renderAll.bind(canvas_custom),
+  {
+    left: 250,
+    top: 250,
+  }
+);
+
+if (screen.width < 576) {
+  canvas_custom.setZoom(mobileZoom);
+  canvas_custom.setWidth(500 * canvas.getZoom());
+  canvas_custom.setHeight(500 * canvas.getZoom());
+}
+
+// foto
+document
+  .getElementById("pilihanGambar-custom")
+  .addEventListener("change", function (e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (f) {
+      var data = f.target.result;
+      fabric.Image.fromURL(data, function (img) {
+        // console.log(img.width + "x" + img.height);
+        // console.log(canvas_custom.width + "x" + canvas_custom.height);
+        img.set({
+          top: 250,
+          left: 250,
+        });
+        img.scaleToHeight(500);
+        img.scaleToWidth(500);
+        var filter = new fabric.Image.filters.Brightness({
+          brightness: -0.15,
+        });
+        img.filters.push(filter);
+        img.applyFilters();
+        // canvas_custom.backgroundImage = img;
+        canvas_custom.add(img);
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+
+function addTextBox_custom() {
+  var textLiarCustom = new fabric.Textbox("TEXTBOX TAMBAHAN", {
+    width: 200,
+    fontSize: 20,
+    fontFamily: "Helvetica",
+    fill: "white",
+    left: 250,
+    top: 250,
+    textAlign: "center",
+  });
+  fabric.Image.fromURL("../imgs/note.png", function (img) {
+    img.scale(0.3).set({
+      top: 250,
+      left: 250,
+    });
+    canvas_custom.add(img);
+  });
+  canvas_custom.add(textLiarCustom);
+  setTimeout(function () {
+    canvas_custom.bringToFront(textLiarCustom);
+  }, 1000);
+  //   console.log("ada");
+}
+
+//Nama dan Filesaver
+document.getElementById("nama-custom").addEventListener("change", function () {
+  var nama = document.getElementById("nama-custom").value;
+  nama = nama + ".png";
+  $("#download-custom").click(function () {
+    //bersihkan canvas sebelum print
+    canvas_custom.discardActiveObject(canvas_custom.getActiveObject());
+    canvas_custom.requestRenderAll();
+    setTimeout(function () {
+      //printing
+      $("#c-custom")
+        .get(0)
+        .toBlob(function (blob) {
+          saveAs(blob, nama);
+        });
+    }, 1000);
+  });
+});
+
+function validasiForm_custom() {
+  if (document.forms["spiritPaper-custom"]["nama-custom"].value == "") {
+    document.querySelector(".mdl-js-snackbar").MaterialSnackbar.showSnackbar({
+      message: "Tulis Tujuan Surat Terlebih Dahulu",
+    });
+    return false;
+  } else {
+    return true;
+  }
+}
+
+//utility
+//keyboard delete
+var canvasWrapper = document.getElementById("canvasWraper");
+canvasWrapper.tabIndex = 1000;
+canvasWrapper.addEventListener("keydown", deleteObjectKeyboard(), false);
+
+function deleteObjectKeyboard() {
+  document.onkeydown = function (e) {
+    if ("Delete" === e.key) {
+      canvas_custom.remove(canvas_custom.getActiveObject());
+      canvas_custom.requestRenderAll();
     }
   };
 }
