@@ -61,6 +61,10 @@
                                 </select>
                                 <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
                             </div>
+                            <div class="mdl-textfield mdl-textfield--floating-label is-focused">
+                                <input type="file" id="profil" name="profil" class="mdl-textfield__input">
+                                <label for="profil" class="mdl-textfield__label">Pilih File Foto:</label>
+                            </div>
                             <!-- Slider nilai -->
                             <div id="slider-nilai">
                                 <label for="nilai1" class="mdl-color-text--grey-400 label-slider">Nilai1</label>
@@ -85,7 +89,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone">
+                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
                         <canvas id="c" width="500" height="500" class="margin-bottom mdl-shadow--8dp"></canvas>
                     </div>
                 </div>

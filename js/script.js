@@ -213,3 +213,18 @@ function validasiForm_multi() {
     return true;
   }
 }
+
+//utility
+//keyboard delete
+var canvasWrapper = document.getElementById("canvasWraper");
+canvasWrapper.tabIndex = 1000;
+canvasWrapper.addEventListener("keydown", deleteObjectKeyboard(), false);
+
+function deleteObjectKeyboard() {
+  document.onkeydown = function (e) {
+    if ("Delete" === e.key) {
+      canvas_multi.remove(canvas_multi.getActiveObject());
+      canvas_multi.requestRenderAll();
+    }
+  };
+}

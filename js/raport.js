@@ -101,6 +101,29 @@ function validasiForm() {
   }
 }
 
+// foto
+document.getElementById("profil").addEventListener("change", function (e) {
+  var file = e.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function (f) {
+    var data = f.target.result;
+    fabric.Image.fromURL(data, function (img) {
+      img.scale(0.2).set({
+        left: 250,
+        top: 100,
+        clipPath: new fabric.Circle({
+          left: 250,
+          top: 100,
+          radius: 100,
+          absolutePositioned: true,
+        }),
+      });
+      canvas.add(img);
+    });
+  };
+  reader.readAsDataURL(file);
+});
+
 //Grafik Nilai
 
 var rectOptions = {
@@ -184,4 +207,49 @@ function kelasWarnaBiru(i) {
     .eq(i)
     .removeClass("mdl-color-text--grey-400")
     .addClass("mdl-color-text--blue");
+}
+
+//Utility
+
+//tombol close
+var img = document.createElement("img");
+img.src = "../imgs/close.png";
+
+fabric.Object.prototype.controls.deleteControl = new fabric.Control({
+  x: 0.5,
+  y: -0.5,
+  offsetY: 16,
+  cursorStyle: "pointer",
+  mouseUpHandler: deleteObject,
+  render: renderIcon,
+  cornerSize: 24,
+});
+
+function deleteObject(eventData, target) {
+  var canvas = target.canvas;
+  canvas.remove(target);
+  canvas.requestRenderAll();
+}
+
+function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+  var size = this.cornerSize;
+  ctx.save();
+  ctx.translate(left, top);
+  ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+  ctx.drawImage(img, -size / 2, -size / 2, size, size);
+  ctx.restore();
+}
+
+//keyboard delete
+var canvasWrapper = document.getElementById("canvasWraper");
+canvasWrapper.tabIndex = 1000;
+canvasWrapper.addEventListener("keydown", deleteObjectKeyboard(), false);
+
+function deleteObjectKeyboard() {
+  document.onkeydown = function (e) {
+    if ("Delete" === e.key) {
+      canvas.remove(canvas.getActiveObject());
+      canvas.requestRenderAll();
+    }
+  };
 }
