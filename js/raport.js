@@ -13,8 +13,8 @@ canvas.setBackgroundImage("../imgs/500.png", canvas.renderAll.bind(canvas), {
 });
 if (screen.width < 576) {
   canvas.setZoom(mobileZoom);
-  canvas.setWidth(500 * canvas.getZoom());
-  canvas.setHeight(500 * canvas.getZoom());
+  canvas.setWidth(canvas.height * canvas.getZoom());
+  canvas.setHeight(canvas.width * canvas.getZoom());
 }
 
 var text = new fabric.Textbox(
@@ -128,8 +128,8 @@ document.getElementById("profil").addEventListener("change", function (e) {
 
 var rectOptions = {
   width: 100,
-  height: 100,
-  top: 500,
+  height: 300,
+  top: 400,
   left: 100,
   fill: "rgba(255,0,0,0.5)",
   selectable: false,
@@ -137,13 +137,29 @@ var rectOptions = {
 
 var nilai1 = new fabric.Rect(rectOptions);
 nilai1.set("left", 100);
-canvas.add(nilai1);
+// canvas.add(nilai1);
 var nilai2 = new fabric.Rect(rectOptions);
 nilai2.set("left", 250);
-canvas.add(nilai2);
+// canvas.add(nilai2);
 var nilai3 = new fabric.Rect(rectOptions);
 nilai3.set("left", 400);
-canvas.add(nilai3);
+// canvas.add(nilai3);
+
+// group clipping
+var clipPath = new fabric.Rect({
+  width: 450,
+  height: 200,
+  top: 300,
+  left: 250,
+  absolutePositioned: true,
+});
+canvas.add(clipPath);
+var group = new fabric.Group([nilai1, nilai2, nilai3]);
+group.set({
+  selectable: false,
+});
+group.clipPath = clipPath;
+canvas.add(group);
 
 var teksNilaiOptions = {
   width: 200,
@@ -151,7 +167,7 @@ var teksNilaiOptions = {
   fontFamily: "Helvetica",
   fill: "white",
   left: 100,
-  top: 400,
+  top: 300,
   textAlign: "center",
   selectable: false,
 };
@@ -168,8 +184,8 @@ canvas.add(teksNilai3);
 
 $("#nilai1").on("input", function () {
   kelasWarnaBiru(0);
-  nilai1.set("height", parseInt(this.value) * 5);
-  teksNilai1.text = String(this.value);
+  nilai1.set("height", parseInt(this.value) * 3);
+  teksNilai1.text = "Nilai1\n" + String(this.value);
   canvas.requestRenderAll();
   $("#nilai1").on("mouseup touchend", function () {
     kelasWarnaAbu(0);
@@ -177,8 +193,8 @@ $("#nilai1").on("input", function () {
 });
 $("#nilai2").on("input", function () {
   kelasWarnaBiru(1);
-  nilai2.set("height", parseInt(this.value) * 5);
-  teksNilai2.text = String(this.value);
+  nilai2.set("height", parseInt(this.value) * 3);
+  teksNilai2.text = "Nilai2\n" + String(this.value);
   canvas.requestRenderAll();
   $("#nilai2").on("mouseup touchend", function () {
     kelasWarnaAbu(1);
@@ -186,8 +202,8 @@ $("#nilai2").on("input", function () {
 });
 $("#nilai3").on("input", function () {
   kelasWarnaBiru(2);
-  nilai3.set("height", parseInt(this.value) * 5);
-  teksNilai3.text = String(this.value);
+  nilai3.set("height", parseInt(this.value) * 3);
+  teksNilai3.text = "Nilai3\n" + String(this.value);
   canvas.requestRenderAll();
   $("#nilai3").on("mouseup touchend", function () {
     kelasWarnaAbu(2);

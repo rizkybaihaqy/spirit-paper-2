@@ -282,7 +282,7 @@ function addTextBox_custom() {
     textAlign: "center",
   });
   fabric.Image.fromURL("../imgs/note.png", function (img) {
-    img.scale(0.3).set({
+    img.scale(0.15).set({
       top: 250,
       left: 250,
     });
