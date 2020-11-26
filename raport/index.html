@@ -52,28 +52,75 @@
                                 <input type="text" name="nama" id="nama" class="mdl-textfield__input">
                                 <label for="nama" class="mdl-textfield__label">Surat Untuk</label>
                             </div>
-                            <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select name="jabatan" id="jabatan" class="mdl-textfield__input">
+                                    <option selected disabled value=""></option>
+                                    <optgroup label="PH">
+                                        <option value="KETUA">KETUA</option>
+                                        <option value="WAKIL KETUA">WAKIL KETUA</option>
+                                        <option value="SEKRETARIS 1">SEKRETARIS 1</option>
+                                        <option value="SEKRETARIS 2">SEKRETARIS 2</option>
+                                        <option value="BENDAHARA 1">BENDAHARA 1</option>
+                                        <option value="BENDAHARA 2">BENDAHARA 2</option>
+                                    </optgroup>
+                                    <optgroup label="KOMINFO">
+                                        <option value="KEPALA STAFF AHLI KOMINFO">KEPALA STAFF AHLI KOMINFO</option>
+                                        <option value="STAFF AHLI KOMINFO">STAFF AHLI KOMINFO</option>
+                                    </optgroup>
+                                    <optgroup label="DIKLAT">
+                                        <option value="KEPALA DIVISI DIKLAT">KEPALA DIVISI DIKLAT</option>
+                                        <option value="DIVISI DIKLAT">DIVISI DIKLAT</option>
+                                    </optgroup>
+                                    <optgroup label="PSDM">
+                                        <option value="KEPALA DIVISI PSDM">KEPALA DIVISI PSDM</option>
+                                        <option value="DIVISI PSDM">DIVISI PSDM</option>
+                                    </optgroup>
+                                    <optgroup label="SOSIAL">
+                                        <option value="KEPALA DIVISI SOSIAL">KEPALA DIVISI SOSIAL</option>
+                                        <option value="DIVISI SOSIAL">DIVISI SOSIAL</option>
+                                    </optgroup>
+                                    <optgroup label="EKOKEU">
+                                        <option value="KEPALA DIVISI EKOKEU">KEPALA DIVISI EKOKEU</option>
+                                        <option value="DIVISI EKOKEU">DIVISI EKOKEU</option>
+                                    </optgroup>
+                                    <optgroup label="MIKAT">
+                                        <option value="KEPALA DIVISI MIKAT">KEPALA DIVISI MIKAT</option>
+                                        <option value="DIVISI MIKAT">DIVISI MIKAT</option>
+                                    </optgroup>
+                                </select>
+                                <label for="jabatan" class="mdl-textfield__label">Pilih Jabatan</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <select name="pilihanGambar" id="pilihanGambar" class="mdl-textfield__input">
                                     <option selected disabled value=""></option>
-                                    <option value="imgs/es.png">es</option>
+                                    <option value="../imgs/raport/PH.png">PH</option>
+                                    <option value="../imgs/raport/KOMS.png">KOMINFO</option>
+                                    <option value="../imgs/raport/DIKLAT.png">DIKLAT</option>
+                                    <option value="../imgs/raport/PSDM.png">PSDM</option>
+                                    <option value="../imgs/raport/SOSIAL.png">SOSIAL</option>
+                                    <option value="../imgs/raport/EKOKU.png">EKOKEU</option>
+                                    <option value="../imgs/raport/MIKAT.png">MIKAT</option>
                                 </select>
-                                <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
-                            </div> -->
+                                <label for="pilihanGambar" class="mdl-textfield__label">Pilih Template Divisi</label>
+                            </div>
                             <div class="mdl-textfield mdl-textfield--floating-label is-focused">
                                 <input type="file" id="profil" name="profil" class="mdl-textfield__input">
                                 <label for="profil" class="mdl-textfield__label">Pilih File Foto:</label>
                             </div>
                             <!-- Slider nilai -->
                             <div id="slider-nilai">
-                                <label for="nilai1" class="mdl-color-text--grey-400 label-slider">Nilai1</label>
+                                <label for="nilai1" class="mdl-color-text--grey-400 label-slider">Agility</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai1" name="nilai1">
-                                <label for="nilai2" class="mdl-color-text--grey-400 label-slider">Nilai2</label>
+                                <label for="nilai2" class="mdl-color-text--grey-400 label-slider">Luck</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai2">
-                                <label for="nilai3" class="mdl-color-text--grey-400 label-slider">Nilai3</label>
+                                <label for="nilai3" class="mdl-color-text--grey-400 label-slider">Endurance</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai3">
+                                <label for="nilai4" class="mdl-color-text--grey-400 label-slider">Intelligence</label>
+                                <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
+                                    tabindex="0" id="nilai4">
                             </div>
                             <!-- button group -->
                             <div class="margin-bottom margin-top">
@@ -88,7 +135,7 @@
                         </form>
                     </div>
                     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
-                        <canvas id="c" width="500" height="500" class="margin-bottom mdl-shadow--8dp"></canvas>
+                        <canvas id="c" width="595" height="842" class="margin-bottom mdl-shadow--8dp"></canvas>
                     </div>
                 </div>
             </section>

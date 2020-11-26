@@ -7,54 +7,91 @@ fabric.Object.prototype.originX = fabric.Object.prototype.originY = "center";
 var canvas = (this.__canvas = new fabric.Canvas("c", {
   preserveObjectStacking: true,
 }));
-canvas.setBackgroundImage("../imgs/500.png", canvas.renderAll.bind(canvas), {
-  left: 250,
-  top: 250,
-});
-if (screen.width < 576) {
-  canvas.setZoom(mobileZoom);
-  canvas.setWidth(canvas.height * canvas.getZoom());
-  canvas.setHeight(canvas.width * canvas.getZoom());
-}
-
-var text = new fabric.Textbox(
-  "Text Disni\ntextbox bisa diubah ukuran dan posisi",
+canvas.setBackgroundImage(
+  "../imgs/raport/595x842.png",
+  canvas.renderAll.bind(canvas),
   {
-    width: 200,
-    fontSize: 20,
-    fontFamily: "Helvetica",
-    fill: "white",
-    left: 250,
-    top: 260,
-    textAlign: "center",
+    left: 297.5,
+    top: 421,
   }
 );
+if (screen.width < 576) {
+  canvas.setZoom(mobileZoom);
+  canvas.setWidth(canvas.width * canvas.getZoom());
+  canvas.setHeight(canvas.height * canvas.getZoom());
+}
+var textOptions = {
+  width: 480,
+  fontSize: 15,
+  fontFamily: "Helvetica",
+  fill: "white",
+  left: 320,
+  top: 380,
+  textAlign: "left",
+};
+var isiNamaTeks;
+var isiJabatanTeks;
+
+var text = new fabric.Textbox(
+  "Kayaknya ga muat banyak teksnya deh disni.  Sisanya kalo masih ada yang mau disampein dan udah gamuat, kalian bisa pakek yang satunya lagi yang ada gamabr makannanya. Bisa di atur posisi.",
+  textOptions
+);
+
+var namaTeks = new fabric.Textbox("Nama", textOptions);
+namaTeks.set({
+  fontSize: 20,
+  fill: "black",
+  fontWeight: "bold",
+  top: 235,
+  selectable: false,
+});
+var jabatanTeks = new fabric.Textbox("Jabatan", textOptions);
+jabatanTeks.set({
+  fontSize: 25,
+  fill: "black",
+  fontWeight: "bold",
+  top: 280,
+  selectable: false,
+});
+canvas.add(namaTeks);
+canvas.add(jabatanTeks);
 canvas.add(text);
 
-// document
-//   .getElementById("pilihanGambar")
-//   .addEventListener("change", function () {
-//     // console.log("gambar");
-//     var gambar = document.getElementById("pilihanGambar").value;
-//     img.src = gambar;
+$("#nama").on("change", function (isiNamaTeks) {
+  isiNamaTeks = String(this.value);
+  namaTeks.text = isiNamaTeks;
+  canvas.requestRenderAll();
+});
+$("#jabatan").on("change", function (isiJabatanTeks) {
+  isiJabatanTeks = String(this.value);
+  jabatanTeks.text = isiJabatanTeks;
+  canvas.requestRenderAll();
+});
 
-//     fabric.Image.fromURL(img.src, function (img) {
-//       img.set({
-//         left: 250,
-//         top: 250,
-//         //   selectable: false,
-//       });
+document
+  .getElementById("pilihanGambar")
+  .addEventListener("change", function () {
+    // console.log("gambar");
+    var gambar = document.getElementById("pilihanGambar").value;
+    img.src = gambar;
 
-//       var filter = new fabric.Image.filters.Brightness({
-//         brightness: -0.15,
-//       });
-//       img.filters.push(filter);
-//       img.applyFilters();
-//       canvas.backgroundImage = img;
-//       // canvas.add(img);
-//       canvas.bringToFront(text);
-//     });
-//   });
+    fabric.Image.fromURL(img.src, function (img) {
+      img.set({
+        left: 297.5,
+        top: 421,
+        //   selectable: false,
+      });
+
+      var filter = new fabric.Image.filters.Brightness({
+        brightness: -0.15,
+      });
+      img.filters.push(filter);
+      img.applyFilters();
+      canvas.backgroundImage = img;
+      // canvas.add(img);
+      canvas.bringToFront(text);
+    });
+  });
 
 // function addTextBox() {
 //   var textLiar = new fabric.Textbox("TEXTBOX TAMBAHAN", {
@@ -109,12 +146,12 @@ document.getElementById("profil").addEventListener("change", function (e) {
     var data = f.target.result;
     fabric.Image.fromURL(data, function (img) {
       img.scale(0.2).set({
-        left: 250,
-        top: 100,
+        left: 475,
+        top: 200,
         clipPath: new fabric.Circle({
-          left: 250,
-          top: 100,
-          radius: 100,
+          left: 475,
+          top: 150,
+          radius: 79,
           absolutePositioned: true,
         }),
       });
@@ -126,11 +163,13 @@ document.getElementById("profil").addEventListener("change", function (e) {
 
 //Grafik Nilai
 
+var modifier = 4;
+
 var rectOptions = {
-  width: 100,
-  height: 300,
-  top: 400,
-  left: 100,
+  width: 75,
+  height: 100 * modifier,
+  top: 775,
+  left: 150,
   fill: "rgba(255,0,0,0.5)",
   selectable: false,
 };
@@ -139,27 +178,37 @@ var nilai1 = new fabric.Rect(rectOptions);
 nilai1.set("left", 100);
 // canvas.add(nilai1);
 var nilai2 = new fabric.Rect(rectOptions);
-nilai2.set("left", 250);
+nilai2.set("left", 235);
 // canvas.add(nilai2);
 var nilai3 = new fabric.Rect(rectOptions);
-nilai3.set("left", 400);
+nilai3.set("left", 365);
+// canvas.add(nilai3);
+var nilai4 = new fabric.Rect(rectOptions);
+nilai4.set("left", 500);
 // canvas.add(nilai3);
 
 // group clipping
 var clipPath = new fabric.Rect({
-  width: 450,
-  height: 200,
-  top: 300,
-  left: 250,
+  width: 500,
+  height: 250,
+  top: 650,
+  left: 300,
   absolutePositioned: true,
 });
-canvas.add(clipPath);
-var group = new fabric.Group([nilai1, nilai2, nilai3]);
+// canvas.add(clipPath);
+var group = new fabric.Group([nilai1, nilai2, nilai3, nilai4]);
 group.set({
   selectable: false,
 });
 group.clipPath = clipPath;
 canvas.add(group);
+
+// Nilai
+
+var isiTeksNilai1 = "Agility";
+var isiTeksNilai2 = "Luck";
+var isiTeksNilai3 = "Endurance";
+var isiTeksNilai4 = "Intelligence";
 
 var teksNilaiOptions = {
   width: 200,
@@ -167,25 +216,28 @@ var teksNilaiOptions = {
   fontFamily: "Helvetica",
   fill: "white",
   left: 100,
-  top: 300,
+  top: 775,
   textAlign: "center",
   selectable: false,
 };
 
-var teksNilai1 = new fabric.Textbox("Nilai1", teksNilaiOptions);
+var teksNilai1 = new fabric.Textbox(isiTeksNilai1, teksNilaiOptions);
 teksNilai1.set("left", 100);
 canvas.add(teksNilai1);
-var teksNilai2 = new fabric.Textbox("Nilai2", teksNilaiOptions);
-teksNilai2.set("left", 250);
+var teksNilai2 = new fabric.Textbox(isiTeksNilai2, teksNilaiOptions);
+teksNilai2.set("left", 235);
 canvas.add(teksNilai2);
-var teksNilai3 = new fabric.Textbox("Nilai3", teksNilaiOptions);
-teksNilai3.set("left", 400);
+var teksNilai3 = new fabric.Textbox(isiTeksNilai3, teksNilaiOptions);
+teksNilai3.set("left", 365);
 canvas.add(teksNilai3);
+var teksNilai4 = new fabric.Textbox(isiTeksNilai4, teksNilaiOptions);
+teksNilai4.set("left", 500);
+canvas.add(teksNilai4);
 
 $("#nilai1").on("input", function () {
   kelasWarnaBiru(0);
-  nilai1.set("height", parseInt(this.value) * 3);
-  teksNilai1.text = "Nilai1\n" + String(this.value);
+  nilai1.set("height", parseInt(this.value) * modifier);
+  teksNilai1.text = String(this.value) + "\n" + isiTeksNilai1;
   canvas.requestRenderAll();
   $("#nilai1").on("mouseup touchend", function () {
     kelasWarnaAbu(0);
@@ -193,8 +245,8 @@ $("#nilai1").on("input", function () {
 });
 $("#nilai2").on("input", function () {
   kelasWarnaBiru(1);
-  nilai2.set("height", parseInt(this.value) * 3);
-  teksNilai2.text = "Nilai2\n" + String(this.value);
+  nilai2.set("height", parseInt(this.value) * modifier);
+  teksNilai2.text = String(this.value) + "\n" + isiTeksNilai2;
   canvas.requestRenderAll();
   $("#nilai2").on("mouseup touchend", function () {
     kelasWarnaAbu(1);
@@ -202,11 +254,20 @@ $("#nilai2").on("input", function () {
 });
 $("#nilai3").on("input", function () {
   kelasWarnaBiru(2);
-  nilai3.set("height", parseInt(this.value) * 3);
-  teksNilai3.text = "Nilai3\n" + String(this.value);
+  nilai3.set("height", parseInt(this.value) * modifier);
+  teksNilai3.text = String(this.value) + "\n" + isiTeksNilai3;
   canvas.requestRenderAll();
   $("#nilai3").on("mouseup touchend", function () {
     kelasWarnaAbu(2);
+  });
+});
+$("#nilai4").on("input", function () {
+  kelasWarnaBiru(3);
+  nilai4.set("height", parseInt(this.value) * modifier);
+  teksNilai4.text = String(this.value) + "\n" + isiTeksNilai4;
+  canvas.requestRenderAll();
+  $("#nilai4").on("mouseup touchend", function () {
+    kelasWarnaAbu(3);
   });
 });
 
@@ -257,15 +318,15 @@ function renderIcon(ctx, left, top, styleOverride, fabricObject) {
 }
 
 //keyboard delete
-var canvasWrapper = document.getElementById("canvasWraper");
-canvasWrapper.tabIndex = 1000;
-canvasWrapper.addEventListener("keydown", deleteObjectKeyboard(), false);
+// var canvasWrapper = document.getElementById("canvasWraper");
+// canvasWrapper.tabIndex = 1000;
+// canvasWrapper.addEventListener("keydown", deleteObjectKeyboard(), false);
 
-function deleteObjectKeyboard() {
-  document.onkeydown = function (e) {
-    if ("Delete" === e.key) {
-      canvas.remove(canvas.getActiveObject());
-      canvas.requestRenderAll();
-    }
-  };
-}
+// function deleteObjectKeyboard() {
+//   document.onkeydown = function (e) {
+//     if ("Delete" === e.key) {
+//       canvas.remove(canvas.getActiveObject());
+//       canvas.requestRenderAll();
+//     }
+//   };
+// }
