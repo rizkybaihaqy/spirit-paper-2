@@ -28,12 +28,18 @@ var textOptions = {
   left: 320,
   top: 380,
   textAlign: "left",
+  lockRotation: true,
+  lockScalingX: true,
+  lockScalingY: true,
+  lockScalingFlip: true,
 };
 var isiNamaTeks;
 var isiJabatanTeks;
+var warnaDivisi = "rgba(255,0,0,0.5)";
+var added;
 
 var text = new fabric.Textbox(
-  "Kayaknya ga muat banyak teksnya deh disni.  Sisanya kalo masih ada yang mau disampein dan udah gamuat, kalian bisa pakek yang satunya lagi yang ada gamabr makannanya. Bisa di atur posisi.",
+  "Kalo masih ada yang mau disampein dan udah gamuat, kalian bisa pakek yang satunya lagi yang ada gamabar makannanya. Teks box ini Bisa di atur posisinya dengan cara pilh teksbox lalu geser. Cara edit teksnya adalah dengan select tekxbox hingga dapat mengedit teks. ",
   textOptions
 );
 
@@ -53,9 +59,9 @@ jabatanTeks.set({
   top: 280,
   selectable: false,
 });
-canvas.add(namaTeks);
-canvas.add(jabatanTeks);
-canvas.add(text);
+// canvas.add(namaTeks);
+// canvas.add(jabatanTeks);
+// canvas.add(text);
 
 $("#nama").on("change", function (isiNamaTeks) {
   isiNamaTeks = String(this.value);
@@ -65,33 +71,96 @@ $("#nama").on("change", function (isiNamaTeks) {
 $("#jabatan").on("change", function (isiJabatanTeks) {
   isiJabatanTeks = String(this.value);
   jabatanTeks.text = isiJabatanTeks;
-  canvas.requestRenderAll();
-});
 
-document
-  .getElementById("pilihanGambar")
-  .addEventListener("change", function () {
-    // console.log("gambar");
-    var gambar = document.getElementById("pilihanGambar").value;
-    img.src = gambar;
+  var gambar;
 
-    fabric.Image.fromURL(img.src, function (img) {
-      img.set({
-        left: 297.5,
-        top: 421,
-        //   selectable: false,
-      });
+  switch (isiJabatanTeks) {
+    case "KETUA":
+    case "WAKIL KETUA":
+    case "SEKRETARIS 1":
+    case "SEKRETARIS 2":
+    case "BENDAHARA 1":
+    case "BENDAHARA 2":
+      gambar = "../imgs/raport/PH.png";
+      warnaDivisi = "rgba(0,204,255,0.5)";
+      break;
+    case "KEPALA STAFF AHLI KOMINFO":
+    case "STAFF AHLI KOMINFO":
+      gambar = "../imgs/raport/KOMS.png";
+      warnaDivisi = "rgba(51,96,153,0.5)";
+      break;
+    case "KEPALA DIVISI DIKLAT":
+    case "DIVISI DIKLAT":
+      gambar = "../imgs/raport/DIKLAT.png";
+      warnaDivisi = "rgba(63,164,206,0.5)";
+      break;
+    case "KEPALA DIVISI PSDM":
+    case "DIVISI PSDM":
+      gambar = "../imgs/raport/PSDM.png";
+      warnaDivisi = "rgba(191,53,57,0.5)";
+      break;
+    case "KEPALA DIVISI SOSIAL":
+    case "DIVISI SOSIAL":
+      gambar = "../imgs/raport/SOSIAL.png";
+      warnaDivisi = "rgba(253,197,78,0.5)";
+      break;
+    case "KEPALA DIVISI EKOKEU":
+    case "DIVISI EKOKEU":
+      gambar = "../imgs/raport/EKOKU.png";
+      warnaDivisi = "rgba(168,207,69,0.5)";
+      break;
+    case "KEPALA DIVISI MIKAT":
+    case "DIVISI MIKAT":
+      gambar = "../imgs/raport/MIKAT.png";
+      warnaDivisi = "rgba(234,96,68,0.5)";
+      break;
+    default:
+      gambar = "../imgs/raport/595x842.png";
+      break;
+  }
 
-      var filter = new fabric.Image.filters.Brightness({
-        brightness: -0.15,
-      });
-      img.filters.push(filter);
-      img.applyFilters();
-      canvas.backgroundImage = img;
-      // canvas.add(img);
-      canvas.bringToFront(text);
+  nilai1.set("fill", warnaDivisi);
+  nilai2.set("fill", warnaDivisi);
+  nilai3.set("fill", warnaDivisi);
+  nilai4.set("fill", warnaDivisi);
+
+  img.src = gambar;
+
+  fabric.Image.fromURL(img.src, function (img) {
+    img.set({
+      left: 297.5,
+      top: 421,
+      //   selectable: false,
     });
+
+    var filter = new fabric.Image.filters.Brightness({
+      brightness: -0.15,
+    });
+    img.filters.push(filter);
+    img.applyFilters();
+
+    canvas.backgroundImage = img;
+    // canvas.add(img);
+
+    if (Boolean(added) == false) {
+      canvas.add(namaTeks);
+      canvas.add(jabatanTeks);
+      canvas.add(text);
+
+      canvas.add(group);
+
+      canvas.add(teksNilai1);
+      canvas.add(teksNilai2);
+      canvas.add(teksNilai3);
+      canvas.add(teksNilai4);
+
+      added = true;
+    }
+
+    canvas.requestRenderAll();
+    canvas.bringToFront(text);
   });
+});
 
 // function addTextBox() {
 //   var textLiar = new fabric.Textbox("TEXTBOX TAMBAHAN", {
@@ -170,8 +239,9 @@ var rectOptions = {
   height: 100 * modifier,
   top: 775,
   left: 150,
-  fill: "rgba(255,0,0,0.5)",
+  fill: warnaDivisi,
   selectable: false,
+  rx: 10,
 };
 
 var nilai1 = new fabric.Rect(rectOptions);
@@ -201,14 +271,14 @@ group.set({
   selectable: false,
 });
 group.clipPath = clipPath;
-canvas.add(group);
+// canvas.add(group);
 
 // Nilai
 
-var isiTeksNilai1 = "Agility";
-var isiTeksNilai2 = "Luck";
-var isiTeksNilai3 = "Endurance";
-var isiTeksNilai4 = "Intelligence";
+var isiTeksNilai1 = "Komitmen";
+var isiTeksNilai2 = "Komunikasi";
+var isiTeksNilai3 = "Inisiatif";
+var isiTeksNilai4 = "Bidang";
 
 var teksNilaiOptions = {
   width: 200,
@@ -221,18 +291,18 @@ var teksNilaiOptions = {
   selectable: false,
 };
 
-var teksNilai1 = new fabric.Textbox(isiTeksNilai1, teksNilaiOptions);
+var teksNilai1 = new fabric.Textbox("100\n" + isiTeksNilai1, teksNilaiOptions);
 teksNilai1.set("left", 100);
-canvas.add(teksNilai1);
-var teksNilai2 = new fabric.Textbox(isiTeksNilai2, teksNilaiOptions);
+// canvas.add(teksNilai1);
+var teksNilai2 = new fabric.Textbox("100\n" + isiTeksNilai2, teksNilaiOptions);
 teksNilai2.set("left", 235);
-canvas.add(teksNilai2);
-var teksNilai3 = new fabric.Textbox(isiTeksNilai3, teksNilaiOptions);
+// canvas.add(teksNilai2);
+var teksNilai3 = new fabric.Textbox("100\n" + isiTeksNilai3, teksNilaiOptions);
 teksNilai3.set("left", 365);
-canvas.add(teksNilai3);
-var teksNilai4 = new fabric.Textbox(isiTeksNilai4, teksNilaiOptions);
+// canvas.add(teksNilai3);
+var teksNilai4 = new fabric.Textbox("100\n" + isiTeksNilai4, teksNilaiOptions);
 teksNilai4.set("left", 500);
-canvas.add(teksNilai4);
+// canvas.add(teksNilai4);
 
 $("#nilai1").on("input", function () {
   kelasWarnaBiru(0);
