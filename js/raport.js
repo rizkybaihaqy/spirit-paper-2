@@ -28,12 +28,17 @@ var textOptions = {
   left: 320,
   top: 380,
   textAlign: "left",
+  lockRotation: true,
+  lockScalingX: true,
+  lockScalingY: true,
+  lockScalingFlip: true,
 };
 var isiNamaTeks;
 var isiJabatanTeks;
+var warnaDivisi = "rgba(255,0,0,0.5)";
 
 var text = new fabric.Textbox(
-  "Kayaknya ga muat banyak teksnya deh disni.  Sisanya kalo masih ada yang mau disampein dan udah gamuat, kalian bisa pakek yang satunya lagi yang ada gamabr makannanya. Bisa di atur posisi.",
+  "Kalo masih ada yang mau disampein dan udah gamuat, kalian bisa pakek yang satunya lagi yang ada gamabar makannanya. Teks box ini Bisa di atur posisinya dengan cara pilh teksbox lalu geser. Cara edit teksnya adalah dengan select tekxbox hingga dapat mengedit teks. ",
   textOptions
 );
 
@@ -73,6 +78,36 @@ document
   .addEventListener("change", function () {
     // console.log("gambar");
     var gambar = document.getElementById("pilihanGambar").value;
+
+    switch (gambar) {
+      case "../imgs/raport/PH.png":
+        warnaDivisi = "rgba(0,204,255,0.5)";
+        break;
+      case "../imgs/raport/KOMS.png":
+        warnaDivisi = "rgba(51,96,153,0.5)";
+        break;
+      case "../imgs/raport/DIKLAT.png":
+        warnaDivisi = "rgba(63,164,206,0.5)";
+        break;
+      case "../imgs/raport/PSDM.png":
+        warnaDivisi = "rgba(191,53,57,0.5)";
+        break;
+      case "../imgs/raport/SOSIAL.png":
+        warnaDivisi = "rgba(253,197,78,0.5)";
+        break;
+      case "../imgs/raport/EKOKU.png":
+        warnaDivisi = "rgba(168,207,69,0.5)";
+        break;
+      case "../imgs/raport/MIKAT.png":
+        warnaDivisi = "rgba(234,96,68,0.5)";
+        break;
+    }
+    nilai1.set("fill", warnaDivisi);
+    nilai2.set("fill", warnaDivisi);
+    nilai3.set("fill", warnaDivisi);
+    nilai4.set("fill", warnaDivisi);
+    canvas.requestRenderAll();
+
     img.src = gambar;
 
     fabric.Image.fromURL(img.src, function (img) {
@@ -170,7 +205,7 @@ var rectOptions = {
   height: 100 * modifier,
   top: 775,
   left: 150,
-  fill: "rgba(255,0,0,0.5)",
+  fill: warnaDivisi,
   selectable: false,
 };
 
@@ -221,16 +256,16 @@ var teksNilaiOptions = {
   selectable: false,
 };
 
-var teksNilai1 = new fabric.Textbox(isiTeksNilai1, teksNilaiOptions);
+var teksNilai1 = new fabric.Textbox("100\n" + isiTeksNilai1, teksNilaiOptions);
 teksNilai1.set("left", 100);
 canvas.add(teksNilai1);
-var teksNilai2 = new fabric.Textbox(isiTeksNilai2, teksNilaiOptions);
+var teksNilai2 = new fabric.Textbox("100\n" + isiTeksNilai2, teksNilaiOptions);
 teksNilai2.set("left", 235);
 canvas.add(teksNilai2);
-var teksNilai3 = new fabric.Textbox(isiTeksNilai3, teksNilaiOptions);
+var teksNilai3 = new fabric.Textbox("100\n" + isiTeksNilai3, teksNilaiOptions);
 teksNilai3.set("left", 365);
 canvas.add(teksNilai3);
-var teksNilai4 = new fabric.Textbox(isiTeksNilai4, teksNilaiOptions);
+var teksNilai4 = new fabric.Textbox("100\n" + isiTeksNilai4, teksNilaiOptions);
 teksNilai4.set("left", 500);
 canvas.add(teksNilai4);
 
