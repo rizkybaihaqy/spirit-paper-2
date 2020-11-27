@@ -1,5 +1,5 @@
 var img = new Image();
-var mobileZoom = 0.65;
+var mobileZoom = 0.61;
 
 // (function () {
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = "center";
@@ -11,8 +11,8 @@ canvas.setBackgroundImage(
   "../imgs/raport/595x842.png",
   canvas.renderAll.bind(canvas),
   {
-    left: 297.5,
-    top: 421,
+    originX: "left",
+    originY: "top",
   }
 );
 if (screen.width < 576) {
@@ -20,6 +20,20 @@ if (screen.width < 576) {
   canvas.setWidth(canvas.width * canvas.getZoom());
   canvas.setHeight(canvas.height * canvas.getZoom());
 }
+$("#mobileZoomOut").on("click", function () {
+  mobileZoom = mobileZoom - 0.01;
+  canvas.setZoom(mobileZoom);
+  canvas.setWidth(595 * canvas.getZoom());
+  canvas.setHeight(842 * canvas.getZoom());
+  console.log(canvas.width);
+});
+$("#mobileZoomIn").on("click", function () {
+  mobileZoom = mobileZoom + 0.01;
+  canvas.setZoom(mobileZoom);
+  canvas.setWidth(595 * canvas.getZoom());
+  canvas.setHeight(842 * canvas.getZoom());
+});
+
 var textOptions = {
   width: 480,
   fontSize: 15,
@@ -128,9 +142,9 @@ $("#jabatan").on("change", function (isiJabatanTeks) {
 
   fabric.Image.fromURL(img.src, function (img) {
     img.set({
-      left: 297.5,
-      top: 421,
-      //   selectable: false,
+      // Needed to position backgroundImage at 0/,
+      originX: "left",
+      originY: "top",
     });
 
     var filter = new fabric.Image.filters.Brightness({
@@ -277,7 +291,7 @@ group.clipPath = clipPath;
 
 var isiTeksNilai1 = "Komitmen";
 var isiTeksNilai2 = "Komunikasi";
-var isiTeksNilai3 = "Inisiatif";
+var isiTeksNilai3 = "Keaktifan";
 var isiTeksNilai4 = "Bidang";
 
 var teksNilaiOptions = {

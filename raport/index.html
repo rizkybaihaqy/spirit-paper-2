@@ -48,6 +48,16 @@
                         class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
                         <hr>
                         <form action="" name="spiritPaper">
+                            <div class="mdl-cell--hide-desktop mdl-cell--hide-tablet">
+                                <button type="button" id="mobileZoomOut" name="mobileZoomOut"
+                                    class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent">
+                                    <span class="material-icons">zoom_out</span>
+                                </button>
+                                <button type="button" id="mobileZoomIn" name="mobileZoomIn"
+                                    class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent">
+                                    <span class="material-icons">zoom_in</span>
+                                </button>
+                            </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input type="text" name="nama" id="nama" class="mdl-textfield__input">
                                 <label for="nama" class="mdl-textfield__label">Surat Untuk</label>
@@ -96,24 +106,24 @@
                             </div>
                             <!-- Slider nilai -->
                             <div id="slider-nilai">
-                                <label for="nilai1" class="mdl-color-text--grey-400 label-slider">Agility</label>
+                                <label for="nilai1" class="mdl-color-text--grey-400 label-slider">Komitmen</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai1" name="nilai1">
-                                <label for="nilai2" class="mdl-color-text--grey-400 label-slider">Luck</label>
+                                <label for="nilai2" class="mdl-color-text--grey-400 label-slider">Komunikasi</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai2">
-                                <label for="nilai3" class="mdl-color-text--grey-400 label-slider">Endurance</label>
+                                <label for="nilai3" class="mdl-color-text--grey-400 label-slider">Keaktifan</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai3">
-                                <label for="nilai4" class="mdl-color-text--grey-400 label-slider">Intelligence</label>
+                                <label for="nilai4" class="mdl-color-text--grey-400 label-slider">Bidang</label>
                                 <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0"
                                     tabindex="0" id="nilai4">
                             </div>
                             <!-- button group -->
                             <div class="margin-bottom margin-top">
-                                <a type="button" id="download"
+                                <button type="button" id="download"
                                     class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                    onclick="validasiForm()">Download</a>
+                                    onclick="validasiForm()">Download</button>
                                 <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
                                             onclick="addTextBox()">Add New Text Box</a> -->
                                 <button type="reset"
