@@ -291,7 +291,7 @@ group.clipPath = clipPath;
 
 var isiTeksNilai1 = "Komitmen";
 var isiTeksNilai2 = "Komunikasi";
-var isiTeksNilai3 = "Keaktifan";
+var isiTeksNilai3 = "Inisiatif";
 var isiTeksNilai4 = "Bidang";
 
 var teksNilaiOptions = {
