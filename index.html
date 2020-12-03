@@ -1,3 +1,29 @@
+<!-- 
+    Spirit-paper-2 adalah sebuah aplikasi berbasis web untuk pembuatan spirit paper oleh 
+    Staff ahli LITBANG HMIF UNDIP 2020. Aplikasi ini hanya bekerja pada client side. 
+    Aplikasi ini memanfaatkan tag <canvas> html untuk merender dan mengedit gambar.
+
+    spirit paper 2 adalah pengembangan dari prototype spirit paper
+    (https://github.com/rizkybaihaqy/spirit-paper)(https://rizkybaihaqy.github.io/spirit-paper)
+
+    Aplikasi dibuat menggunakan javascript dengan framework Fabric.js (http://fabricjs.com), 
+    FileSaver.js (https://github.com/eligrey/FileSaver.js) dan jquery (https://jquery.com/).
+        Farbic.js digunakan untuk memudahkan pembuatan object pada <canvas>. Ketergantungan 
+        program ini pada Fabric.js sangatlah besar karena fitur penting pada aplikasi dibangun 
+        menggunakan framework ini. versi yang diganakan saat ini adalah 4.1.0
+        FileSaver.js digunakan untuk menyimpan tampilan <canvas> yang telah di render kedalam 
+        sebuah file gambar. versi yang diganakan saat ini adalah 2.0.2
+        jQuery digunakan sebagai pelengkap untuk mempermudah penulisan javascript. versi yang 
+        diganakan saat ini adalah 3.2.1 slim
+
+    Styling aplikasi menggunakan framework css material design lite (https://getmdl.io/).
+    class dapat dikenali dengan prefix mdl. versi yang dignakan saat ini adalah 1.3.0
+    Icon yang digunakan pada aplikasi adalah material icons (https://material.io/resources/icons).
+
+    Telah dilakukan langkah awal untuk mengikuti istilah progresive web app (pwa). icon beragam
+    ukuran dan manifest.json telah dibuat. hal selanjutnya yang perlu dilakukan adalah membuat
+    service worker dan pengaturan caching.
+ -->
 <!doctype html>
 <html lang="en">
 
@@ -33,186 +59,255 @@
 </head>
 
 <body>
+    <!-- Semua Elemen harus ada di dalam div ini -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
     mdl-layout--fixed-tabs">
+        <!-- Header dari web -->
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">Spirit Paper</span>
             </div>
-            <!-- Tabs -->
-            <!-- <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
-                <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
-            </div> -->
         </header>
-        <!-- <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
-        </div> -->
+        <!-- 
+            Content Web
+            Aplikasi dibagi menjadi 3 tab. simple, multi, custom.
+            Ukuran canvas disetiap tab selalu 500x500 px
+
+            Pada setiap Tab memiliki kolom teks meminta tujuan surat yang
+            nantinya isi dari kolom teks ini akan digunakan untuk menamai
+            nama file yang akan di download.
+
+            Pada setiap tab juga memiliki tombol DOWNLOAD. tombol ini digunakan
+            untuk mendownload tamapilan <canvas> saat ini kedalam file gambar.
+
+            Hanya ada satu validasi yg dilakukan saat tombol download di click
+            yaitu mengecek apakah tujuan surat sudah diisi. Hal ini dilakukan
+            karena tujuan surat akan digunakan sebagai nama file gamabar dan
+            tidak boleh kosong.
+
+            Object pada canvas dapat di hapus menggunakan key delete pada
+            keyboard (tidak terdapat di tab simple)
+        -->
         <main class="mdl-layout__content">
+            <!-- 
+                Tab Pertama simple canvas
+                
+                Simple memiliki fitur yang paling sedikit dan paling sederhana.
+
+                Pengguna dapat memilih SATU gambar makanan sebagai backgroud dari
+                pilihan gambar yang telah disediakan. Gamabr yang telah disediakn
+                juga sudah memiliki memo kosong yang siap diisi. posisi memo SUDAH
+                ditentukan.
+
+                Pengguna dapat mengisi SATU teksbox untuk dituliskan pesan.
+             -->
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                <div class="page-content">
+                <!-- 
+                    mdl-grid digunakan seperti row pada bootstrap.
 
-                    <section id="single" class="">
-                        <div class="mdl-grid">
-                            <div
-                                class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
-                                <hr>
-                                <form action="" name="spiritPaper">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input type="text" name="nama" id="nama" class="mdl-textfield__input">
-                                        <label for="nama" class="mdl-textfield__label">Surat Untuk</label>
-                                    </div>
-                                    <div
-                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
-                                        <select name="pilihanGambar" id="pilihanGambar" class="mdl-textfield__input">
-                                            <option selected disabled value=""></option>
-                                            <option value="imgs/es.png">es</option>
-                                            <option value="imgs/es3.png">es3</option>
-                                            <option value="imgs/es4.png">es4</option>
-                                            <option value="imgs/Kinderjoy.png">Kinder Joy</option>
-                                            <option value="imgs/SUSU.png">Susu</option>
-                                            <option value="imgs/Beer.jpg">Beer</option>
-                                            <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
-                                            <option value="imgs/5dolar.jpg">5 dolar</option>
-                                            <option value="imgs/beer2.jpg">Beer 2</option>
-                                            <option value="imgs/botol.jpg">Botol</option>
-                                            <option value="imgs/botol2.jpg">Botol 2</option>
-                                            <option value="imgs/malkis.jpg">Malkis</option>
-                                            <option value="imgs/kfc.jpg">KFC</option>
-                                            <option value="imgs/susu2.jpg">susu2</option>
-                                            <option value="imgs/santen.jpg">santen</option>
-                                            <option value="imgs/stoberi.jpg">starbucks stroberi</option>
-                                            <option value="imgs/vineta.jpg">Vineta</option>
-                                        </select>
-                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
-                                    </div>
-                                    <div class="margin-bottom">
-                                        <a type="button" id="download"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                            onclick="validasiForm()">Download</a>
-                                        <!-- <a type="button" value="addText" id="addText" class="btn waves-effect waves-light"
-                                            onclick="addTextBox()">Add New Text Box</a> -->
-                                        <button type="reset"
-                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
-                                    </div>
-                                </form>
+                    Dua div di dalam div mdl-grid menggunakan kelas mdl-order. kelas tersebut 
+                    digunakan untuk menentukan urutan elemen dari kiri ke kanan. Pada 
+                    div ini urutan canvas akan ditukar dengan urutan form ketika digunakan 
+                    pada device kecil. 
+                -->
+                <div class="mdl-grid">
+                    <!-- 
+                        mdl-cell digunakan seperti col pada bootstrap
+
+                        Pada div ini juga di atur layouting pada berbagai ukuran
+                        layar. Sama seperti pada bootstrap, layar dibagi menjadi 12
+                        bagian. offset digunakan untuk memberi space kosong di sisi
+                        kiri dari elemen.
+                    -->
+                    <div
+                        class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
+                        <hr>
+                        <!-- Form Group -->
+                        <form action="" name="spiritPaper" onsubmit="return cancelForm(event)">
+                            <!-- Input tujuan surat -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input type="text" name="nama" id="nama" class="mdl-textfield__input">
+                                <label for="nama" class="mdl-textfield__label">Surat Untuk</label>
                             </div>
-                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone">
-                                <canvas id="c" width="500" height="500" class="margin-bottom"></canvas>
+                            <!-- Input Pilihan Gambar -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
+                                <select name="pilihanGambar" id="pilihanGambar" class="mdl-textfield__input"
+                                    onchange="pilihGambar()">
+                                    <option selected disabled value=""></option>
+                                    <option value="imgs/es.png">es</option>
+                                    <option value="imgs/es3.png">es3</option>
+                                    <option value="imgs/es4.png">es4</option>
+                                    <option value="imgs/Kinderjoy.png">Kinder Joy</option>
+                                    <option value="imgs/SUSU.png">Susu</option>
+                                    <option value="imgs/Beer.jpg">Beer</option>
+                                    <option value="imgs/Sauvignon_Blanc.jpg">Sauvignon Blanc</option>
+                                    <option value="imgs/5dolar.jpg">5 dolar</option>
+                                    <option value="imgs/beer2.jpg">Beer 2</option>
+                                    <option value="imgs/botol.jpg">Botol</option>
+                                    <option value="imgs/botol2.jpg">Botol 2</option>
+                                    <option value="imgs/malkis.jpg">Malkis</option>
+                                    <option value="imgs/kfc.jpg">KFC</option>
+                                    <option value="imgs/susu2.jpg">susu2</option>
+                                    <option value="imgs/santen.jpg">santen</option>
+                                    <option value="imgs/stoberi.jpg">starbucks stroberi</option>
+                                    <option value="imgs/vineta.jpg">Vineta</option>
+                                </select>
+                                <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
                             </div>
-                        </div>
-                    </section>
+                            <!-- Input Button Group -->
+                            <div class="margin-bottom">
+                                <!-- Button yg bertipe button tidak akan pernah mensubmit isi form -->
+                                <button type="button" id="download"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                    onclick="print()">Download</button>
+                                <button type="reset"
+                                    class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- canvas yang ber-id c -->
+                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone">
+                        <canvas id="c" width="500" height="500" class="margin-bottom"></canvas>
+                    </div>
                 </div>
             </section>
+
+            <!-- 
+                Tab Kedua Multi teksbox
+                
+                Multi memiliki fitur untuk menambahkan teksbox.
+
+                Pengguna dapat memilih SATU gambar makanan sebagai backgroud dari
+                pilihan gambar yang telah disediakan. Gamabr yang telah disediakn
+                juga sudah memiliki memo kosong yang siap diisi. posisi memo SUDAH
+                ditentukan. Gamabar yang dignakan pada tab ini memiliki DUA memo
+                atau lebih.
+
+                Pengguna dapat mengisi LEBIH DARI SATU teksbox untuk dituliskan pesan.
+                pengguna dapaet menggunakan tombol TAMBAH TEKSBOX untuk menambah obejct
+                teksbox ke dalam canvas yang nantinya dapat dituliskan pesan.
+
+                Pada tab Multi setiap id yang digunakan hampir sama dengan yang digunakan
+                di tab simple. Pembedanya adalah penggunaan suffix -multi
+             -->
             <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                <div class="page-content">
-
-                    <section id="multi" class="">
-                        <div class="mdl-grid">
-                            <div
-                                class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
-                                <hr>
-                                <form action="" name="spiritPaper-multi">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input type="text" name="nama-multi" id="nama-multi"
-                                            class="mdl-textfield__input">
-                                        <label for="nama-multi" class="mdl-textfield__label">Surat Untuk</label>
-                                    </div>
-                                    <div
-                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
-                                        <select name="pilihanGambar-multi" id="pilihanGambar-multi"
-                                            class="mdl-textfield__input">
-                                            <option selected disabled value=""></option>
-                                            <option value="imgs/bundle_halal.jpg">bundle halal</option>
-                                            <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
-                                        </select>
-                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
-                                    </div>
-                                    <div class="margin-bottom">
-                                        <a type="button" value="addText" id="addText-multi"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                            onclick="addTextBox_multi()">Add New
-                                            Text Box</a>
-                                        <div class="mdl-tooltip" for="addText-multi">
-                                            Gunakan tombol delete<br>untuk menghapus teks box
-                                        </div>
-                                        <a type="button" id="download-multi"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                            onclick="validasiForm_multi()">Download</a>
-                                        <button type="reset"
-                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
-                                    </div>
-                                </form>
+                <!-- mdl-grid digunakan seperti row pada bootstrap -->
+                <div class="mdl-grid">
+                    <!-- mdl-cell digunakan seperti col pada bootstrap -->
+                    <div
+                        class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
+                        <hr>
+                        <!-- form Group -->
+                        <form action="" name="spiritPaper-multi" onsubmit="return cancelForm(event)">
+                            <!-- input tujuan surat -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input type="text" name="nama-multi" id="nama-multi" class="mdl-textfield__input">
+                                <label for="nama-multi" class="mdl-textfield__label">Surat Untuk</label>
                             </div>
-                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
-                                <canvas id="c-multi" width="500" height="500" class="margin-bottom"></canvas>
+                            <!-- input pilihan gambar -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
+                                <select name="pilihanGambar-multi" id="pilihanGambar-multi"
+                                    onchange="pilihanGambar_multi()" class="mdl-textfield__input">
+                                    <option selected disabled value=""></option>
+                                    <option value="imgs/bundle_halal.jpg">bundle halal</option>
+                                    <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
+                                </select>
+                                <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
                             </div>
-                        </div>
-                    </section>
-
+                            <!-- input button group -->
+                            <div class="margin-bottom">
+                                <!-- Button untuk menambah kan teksbox -->
+                                <button type="button" value="addText" id="addText-multi"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                    onclick="addTextBox_multi()">Tambah
+                                    Text Box</button>
+                                <!-- Button yg bertipe button tidak akan pernah mensubmit isi form -->
+                                <button type="button" id="download-multi"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                    onclick="print_multi()">Download</button>
+                                <button type="reset"
+                                    class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- canvas dengan id c-multi -->
+                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper-multi">
+                        <canvas id="c-multi" width="500" height="500" class="margin-bottom"></canvas>
+                    </div>
                 </div>
             </section>
 
+            <!-- 
+                Tab Kedua Custom image
+                
+                Custom memiliki fitur untuk menambahkan gambar sendiri.
+
+                Pengguna dapat mengUPLOAD gambarnya sendiri. Ukuran Gambar yang dianjurkan
+                adalah 500x500 px. Gambar tidak wajib memiliki memo.
+
+                Pengguna dapat mengisi LEBIH DARI SATU teksbox untuk dituliskan pesan.
+                pengguna dapaet menggunakan tombol TAMBAH TEKSBOX untuk menambah obejct
+                teksbox ke dalam canvas yang nantinya dapat dituliskan pesan.
+
+                Pada tab Custom memo diberikan bersamaan dengan teksbox. posisi memo
+                dapat DIUBAH.
+
+                Pada tab Custom setiap id yang digunakan hampir sama dengan yang digunakan
+                di tab simple. Pembedanya adalah penggunaan suffix -custom
+             -->
             <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-                <div class="page-content">
-
-                    <section id="custom" class="">
-                        <div class="mdl-grid">
-                            <div
-                                class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
-                                <hr>
-                                <form action="" name="spiritPaper-custom">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input type="text" name="nama-custom" id="nama-custom"
-                                            class="mdl-textfield__input">
-                                        <label for="nama-custom" class="mdl-textfield__label">Surat Untuk</label>
-                                    </div>
-                                    <!-- <div
-                                        class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label margin-bottom">
-                                        <select name="pilihanGambar-custom" id="pilihanGambar-custom"
-                                            class="mdl-textfield__input">
-                                            <option selected disabled value=""></option>
-                                            <option value="imgs/bundle_halal.jpg">bundle halal</option>
-                                            <option value="imgs/bundle_halal2.jpg">bundle halal2</option>
-                                        </select>
-                                        <label for="pilihanGambar" class="mdl-textfield__label">Pilih Gambar</label>
-                                    </div> -->
-                                    <div class="mdl-textfield mdl-textfield--floating-label is-focused margin-bottom">
-                                        <input type="file" id="pilihanGambar-custom" name="pilihanGambar-custom"
-                                            class="mdl-textfield__input">
-                                        <label for="pilihanGambar-custom" class="mdl-textfield__label">Pilih File
-                                            Foto:</label>
-                                    </div>
-                                    <div class="margin-bottom">
-                                        <a type="button" value="addText" id="addText-custom"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                            onclick="addTextBox_custom()">Add New
-                                            Text Box</a>
-                                        <a type="button" id="download-custom"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                                            onclick="validasiForm_custom()">Download</a>
-                                        <button type="reset"
-                                            class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
-                                    </div>
-                                </form>
+                <!-- mdl-grid digunakan seperti row pada bootstrap -->
+                <div class="mdl-grid">
+                    <!-- mdl-cell digunakan seperti col pada bootstrap -->
+                    <div
+                        class="mdl-cell mdl-cell--4-col-phone mdl-cell--2-col-tablet mdl-cell--order-2-phone mdl-cell--1-offset-desktop">
+                        <hr>
+                        <!-- form group -->
+                        <form action="" name="spiritPaper-custom" onsubmit="return cancelForm(event)">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input type="text" name="nama-custom" id="nama-custom" class="mdl-textfield__input">
+                                <label for="nama-custom" class="mdl-textfield__label">Surat Untuk</label>
                             </div>
-                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper">
-                                <canvas id="c-custom" width="500" height="500" class="margin-bottom"></canvas>
+                            <!-- input gambar dengan cara upload -->
+                            <div class="mdl-textfield mdl-textfield--floating-label is-focused margin-bottom">
+                                <input type="file" id="pilihanGambar-custom" name="pilihanGambar-custom"
+                                    class="mdl-textfield__input" oninput="uploadGambar()">
+                                <label for="pilihanGambar-custom" class="mdl-textfield__label">Pilih File
+                                    Foto:</label>
                             </div>
-                        </div>
-                    </section>
-
-                </div>
-            </section>
-            <section id="tooltips">
-                <div class="mdl-tooltip" for="addText-custom">
-                    Gunakan tombol delete<br>untuk menghapus teks box
+                            <!-- input button group -->
+                            <div class="margin-bottom">
+                                <!-- Button untuk menambah kan teksbox dan memo sekaligus-->
+                                <button type="button" value="addText" id="addText-custom"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                    onclick="addTextBox_custom()">Add New
+                                    Text Box</button>
+                                <!-- Button yg bertipe button tidak akan pernah mensubmit isi form -->
+                                <button type="button" id="download-custom"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                    onclick="print_custom()">Download</button>
+                                <button type="reset"
+                                    class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- canvas dengan id c-custom -->
+                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--order-1-phone" id="canvasWraper-custom">
+                        <canvas id="c-custom" width="500" height="500" class="margin-bottom"></canvas>
+                    </div>
                 </div>
             </section>
         </main>
+        <!-- Bagian bawah dari halaman -->
         <footer class="mdl-layout__header">
-            <!-- Tabs -->
+            <!-- 
+                Tabs
+
+                Tombol tab, menuju elemen dengan id dan menyembunyikan sisanya
+                Ditaruh bagian bawah untuk aksesibility yang lebih
+                mudah pada layar smartphone
+             -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Simple</a>
                 <a href="#fixed-tab-2" class="mdl-layout__tab">Multiple Textbox</a>
@@ -220,10 +315,31 @@
             </div>
         </footer>
     </div>
-    <div class="mdl-snackbar mdl-js-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button type="button" class="mdl-snackbar__action"></button>
-    </div>
+
+    <!-- 
+        TOOLTIPS
+
+        seperti namnaya, section ini memberikan tooltips
+        ke id yang ditulis pada for.
+    -->
+    <section id="tooltips">
+        <div class="mdl-tooltip" for="addText-custom">
+            Gunakan tombol delete<br>untuk menghapus object
+        </div>
+    </section>
+    <!-- 
+        SNACKBAR
+
+        Pada aplikasi ini digunakan untuk menampilkan 
+        pesan error ketika tujuan surat belum diisi.
+        pesan snackbar diatur di script.js. keberadaan button
+    -->
+    <section id="snackbar">
+        <div class="mdl-snackbar mdl-js-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button type="button" class="mdl-snackbar__action"></button>
+        </div>
+    </section>
 
     <!--JavaScript at end of body for optimized loading-->
     <!-- Compiled and minified JavaScript -->
