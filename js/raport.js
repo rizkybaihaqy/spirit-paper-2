@@ -4,6 +4,7 @@
 var img = new Image();
 var mobileZoom = 0.61;
 var added;
+var pesan;
 
 //teks pesan
 var textOptions = {
@@ -388,16 +389,28 @@ function graphNilai4() {
 }
 
 /*
+ * Prosedur untuk memunculkan snackbar
+ * Sudah bawaan dari mdl
+ * Memunculkan pesan error dari variabel pesan
+ */
+function fireSnackBar(pesan) {
+  document.querySelector(".mdl-js-snackbar").MaterialSnackbar.showSnackbar({
+    message: pesan,
+  });
+}
+
+/*
  * Fungsi getNama.
  * Fungsi akan mengambil dan mengembalikan nilai dari #nama
  * ditambah dengan .png
  * (hanya untuk mempermudah dalam membuka file bukan untuk menentukan ekstensi file)
- * Jika kosong akan memanggil fungsi snackbar
+ * Jika kosong akan memanggil fungsi snackbar dengan pesan
  * dan mengembalikan nilai false
  */
 function getNama() {
   if ($("#nama").val() == "") {
-    fireSnackBar();
+    pesan = "Tulis Tujuan Surat Terlebih Dahulu";
+    fireSnackBar(pesan);
     return false;
   } else {
     var nama = $("#nama").val();
@@ -407,13 +420,33 @@ function getNama() {
 }
 
 /*
- * Prosedur untuk memunculkan snackbar
- * Sudah bawaan dari mdl
+ * Fungsi isJabatanNotEmpty
+ * Jika kosong akan memanggil fungsi snackbar dengan pesan
+ * dan mengembalikan nilai false
  */
-function fireSnackBar() {
-  document.querySelector(".mdl-js-snackbar").MaterialSnackbar.showSnackbar({
-    message: "Tulis Tujuan Surat Terlebih Dahulu",
-  });
+function isJabatanNotEmpty() {
+  if ($("#jabatan").val() == null) {
+    pesan = "Pilih Jabatan Tujuan Terlebih Dahulu";
+    fireSnackBar(pesan);
+    return false;
+  } else {
+    return true;
+  }
+}
+
+/*
+ * Fungsi isProfilNotEmpty
+ * Jika kosong akan memanggil fungsi snackbar dengan pesan
+ * dan mengembalikan nilai false
+ */
+function isProfilNotEmpty() {
+  if ($("#profil").val() == "") {
+    pesan = "Upload Foto Tujuan Terlebih Dahulu";
+    fireSnackBar(pesan);
+    return false;
+  } else {
+    return true;
+  }
 }
 
 /*
@@ -426,7 +459,7 @@ function fireSnackBar() {
  * Setelah itu dilakukan Prosedur saveAs() dari FileSaver.js
  */
 function print() {
-  if (getNama()) {
+  if (getNama() && isJabatanNotEmpty() && isProfilNotEmpty()) {
     nama = getNama();
     //bersihkan canvas sebelum print
     canvas.discardActiveObject(canvas.getActiveObject());
@@ -464,6 +497,7 @@ fabric.Object.prototype.controls.deleteControl = new fabric.Control({
 function deleteObject(eventData, target) {
   var canvas = target.canvas;
   canvas.remove(target);
+  $("#profil").val("");
   canvas.requestRenderAll();
 }
 
